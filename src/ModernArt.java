@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -87,19 +88,25 @@ public class ModernArt {
     }
 
     public static void main(String[] args) {
-        File input = new File("art.in");
-        try {
-            Scanner sc = new Scanner(input);
-            int c = sc.nextInt();
-            int[][] art = new int[c][c];
-            for (int i = 0; i < c; i++) {
-                String s = sc.next();
-                for (int j = 0; j < s.length(); j++) {
-                    art[i][j] = Integer.parseInt(s.substring(j, j+1));
+        for (int k = 1; k <= 10; k++) {
+            File input = new File(k + ".in");
+            try {
+                Scanner sc = new Scanner(input);
+                PrintWriter pw = new PrintWriter(k + ".out");
+                int c = sc.nextInt();
+                int[][] art = new int[c][c];
+                for (int i = 0; i < c; i++) {
+                    String s = sc.next();
+                    for (int j = 0; j < s.length(); j++) {
+                        art[i][j] = Integer.parseInt(s.substring(j, j + 1));
+                    }
                 }
+                ModernArt a = new ModernArt(art);
+                pw.println(a.getCount());
+                pw.close();
+            } catch (FileNotFoundException a) {
+                System.out.println("File not found.");
             }
-        } catch (FileNotFoundException a) {
-            System.out.println("File not found.");
         }
     }
 }
